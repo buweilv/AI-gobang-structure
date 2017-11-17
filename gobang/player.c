@@ -1,13 +1,35 @@
+/*
+* 宏TWOUSERS和宏FIRST是不可以同时指定的
+* 宏TWOUSERS表示的是当前的对战模式是双人对战
+* 宏FIRST表示挑战擂主模式时，将用户的策略设置为先手策略
+*/
 #include "gobang.h"
 #include "utils.h"
+#include "AIStrategy.h"
 #include <stdio.h>
 #include <time.h>
+
+// 默认情况下是挑战擂主模式，默认的先手是擂主策略，后手策略是user1Strategy
+#if (!defined(TWOUSERS) && !defined(FIRST))
+void(*firstHandStrategy)(int*, int*) = ringKingStrategy;
+void(*secondHandStrategy)(int*, int*) = user1Strategy;
+#endif
+#ifdef TWOUSERS // 双人对战时，user1Strategy是先手策略，user2Strategy是后手策略
+void(*firstHandStrategy)(int*, int*) = user1Strategy;
+void(*secondHandStrategy)(int*, int*) = user2Strategy;
+#endif // TWOUSERS
+#ifdef FIRST // 挑战擂主模式时，如果编译设置了FIRST宏，表示用户提交的策略是先手策略
+void(*firstHandStrategy)(int*, int*) = user1Strategy;
+void(*secondHandStrategy)(int*, int*) = ringKingStrategy;
+#endif // FIRST
 
 // 平局的情况下，允许两个棋手下棋总时间相差的阈值，此处暂且以秒来作为计时单位
 double totalTimeThreshold = 10; 
 // 先手、后手下棋的总时间
 double firstHandTime = 0;
 double secondHandTime = 0;
+
+
 
 
 // 裁判先判断落子是否正确；再判断局势
@@ -182,19 +204,6 @@ void judge(int row, int col, int side, double time)
 }
 
 
-void firstHand()
-{
-	// 黑棋先手
-	//play(strategy, BLACK);
-}
-
-void secondHand()
-{
-	// 白棋后手
-	//play(x, WHITE);
-}
-
-
 void play(void (*strategy)(int*, int*), int side)
 {
 	// 落子的坐标
@@ -206,4 +215,16 @@ void play(void (*strategy)(int*, int*), int side)
 	end = clock();
 	double time = (double)(start - end); //经测试，Ubuntu16.04上显示精度为微秒级别
 	judge(row, col, side, time);
+}
+
+void firstHand()
+{
+	// 黑棋先手
+	play(firstHandStrategy, BLACK);
+}
+
+void secondHand()
+{
+	// 白棋后手
+	play(secondHandStrategy, WHITE);
 }

@@ -64,6 +64,7 @@
     <IncludePath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.11.25503\include\linux;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="AIStrategy.c" />
     <ClCompile Include="checkboard.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="player.c" />
@@ -71,6 +72,7 @@
     <ClCompile Include="util.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIStrategy.h" />
     <ClInclude Include="gobang.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="utils.h" />
@@ -78,6 +80,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <ThreadSafeStatics>No</ThreadSafeStatics>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalOptions>-DTWOUSERS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

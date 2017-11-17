@@ -1,6 +1,6 @@
 #pragma once
 #ifndef FILE_NAME
-#define FILE_NAME "dup_chess_result"
+#define FILE_NAME "two_users"
 #endif // !FILE_NAME
 enum { 	boardLen = 15 };
 // ∆Â≈ÃπÊ∏Ò

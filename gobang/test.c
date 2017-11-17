@@ -1,5 +1,6 @@
 #include "test.h"
 #include "gobang.h"
+#include "AIStrategy.h"
 #include <stdio.h>
 
 /*
@@ -135,3 +136,11 @@ void judgeTest()
 	output();
 }
 
+// 查看以-DFIRST -DTWOUSERS 以及默认gcc编译选项编译运行之后
+// 棋盘最终的结果形式
+void battleModeTest()
+{
+	firstHand();
+	secondHand();
+	output();
+}

@@ -4,3 +4,5 @@
 void outputTest();
 // 测试裁判函数的正确性
 void judgeTest();
+// 测试对战模式
+void battleModeTest();

@@ -18,6 +18,7 @@ int main()
 	output(); 
 	*/
 	//outputTest();
-	judgeTest();
+	//judgeTest();
+	battleModeTest();
     return 0;
 }
