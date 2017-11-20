@@ -8,6 +8,6 @@
 * 如果选择两个用户对擂的模式，需要两个用户提交策略，先手提交的策略至user1Strategy；后手提交的策略至user2Strategy
 */
 
-void ringKingStrategy(int *, int *);
-void user1Strategy(int *, int *);
-void user2Strategy(int *, int *);
+void ringKingStrategy(int *, int *, int chess);
+void user1Strategy(int *, int *, int chess);
+void user2Strategy(int *, int *, int chess);

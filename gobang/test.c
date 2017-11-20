@@ -141,6 +141,6 @@ void judgeTest()
 void battleModeTest()
 {
 	firstHand();
-	secondHand();
+	//secondHand();
 	output();
 }

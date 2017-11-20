@@ -1,10 +1,10 @@
 #pragma once
 #ifndef FILE_NAME
-#define FILE_NAME "two_users"
+#define FILE_NAME "strategy_test"
 #endif // !FILE_NAME
 enum { 	boardLen = 15 };
 // 棋盘规格
-extern int checkBoard[15][15];
+extern int checkBoard[boardLen][boardLen];
 // CONTINUE: 尚未出现平局或者获胜方
 // DRAW: 裁判判定这是一场平局
 // BLACK/WHITE: 裁判判定黑子/白子获胜
@@ -30,3 +30,5 @@ void secondHand();
 void output();
 // 裁判
 void judge(int row, int col, int side, double time);
+// 判断当前棋盘局势的状态
+int getBoardStatus();
