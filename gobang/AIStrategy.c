@@ -66,6 +66,7 @@ void reverseStatus(char *status)
 			status[i] = 2;
 		if (status[i] == 2)
 			status[i] = 1;
+		i++;
 	}
 	status[i - 1] = '2';
 }
