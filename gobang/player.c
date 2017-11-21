@@ -212,6 +212,10 @@ void play(void (*strategy)(int*, int*, int), int side)
 	start = clock();
 	strategy(&row, &col, side);
 	end = clock();
+	if (side == BLACK)
+		printf("BLACK chess on (%d,%d)\n", row, col);
+	if (side == WHITE)
+		printf("WHITE chess on (%d,%d)\n", row, col);
 	double time = (double)(start - end); //经测试，Ubuntu16.04上显示精度为微秒级别
 	judge(row, col, side, time);
 }

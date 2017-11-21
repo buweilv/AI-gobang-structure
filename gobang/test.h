@@ -6,3 +6,7 @@ void outputTest();
 void judgeTest();
 // 测试对战模式
 void battleModeTest();
+// 测试匹配模式
+void matchTest();
+// 测试评分
+void testEvaluate();

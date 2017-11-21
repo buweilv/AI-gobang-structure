@@ -1,6 +1,7 @@
 #include "test.h"
 #include "gobang.h"
 #include "AIStrategy.h"
+#include "utils.h"
 #include <stdio.h>
 
 /*
@@ -69,7 +70,7 @@ void judgeTest()
 	output();
 	*/
 	// 正斜-win
-	/*
+	
 	initCheckBoard();
 	checkBoard[0][0] = BLACK; checkBoard[0][1] = BLACK;
 	checkBoard[1][0] = BLACK; checkBoard[1][2] = BLACK; checkBoard[2][1] = BLACK;
@@ -79,7 +80,7 @@ void judgeTest()
 	secondHandTime = 150000;
 	judge(0, 4, WHITE, 20);
 	output();
-	*/
+	
 	// 平局-误差在阈值时间内部
 	/*
 	// 偶数行的形式
@@ -129,11 +130,13 @@ void judgeTest()
 	output();
 	*/
 	// 棋子落在已经下过的棋子上
+	/*
 	initCheckBoard();
 	checkBoard[10][10] = BLACK;
 	firstHandTime = 12;
 	judge(10, 10, WHITE, 12);
 	output();
+	*/
 }
 
 // 查看以-DFIRST -DTWOUSERS 以及默认gcc编译选项编译运行之后
@@ -143,4 +146,32 @@ void battleModeTest()
 	firstHand();
 	//secondHand();
 	output();
+}
+
+/*
+* 测试字符串匹配情况
+*/
+
+void matchTest()
+{
+	printf("aabbccabaacaabb has %d aa\n", countMatch( "aa", "aabbccabaacaabb"));
+	printf("abcdsedad has %d aa\n", countMatch("aa", "abcdsedad"));
+	printf("aabbbbbbsss has %d aa\n", countMatch("aa", "aabbbbbbsss"));
+	printf("1111111 has %d 11\n", countMatch("11", "1111111"));
+}
+
+void testEvaluate()
+{
+	int i;
+	initCheckBoard();
+	checkBoard[0][0] = BLACK; checkBoard[0][1] = BLACK;
+	checkBoard[1][0] = BLACK; checkBoard[1][2] = BLACK; checkBoard[2][1] = BLACK;
+	for (i = 0; i < 4; i++)
+		checkBoard[4 - i][i] = WHITE;
+	firstHandTime = 20000;
+	secondHandTime = 150000;
+	judge(0, 4, WHITE, 20);
+	output();
+	long re = evaluate(1, WHITE);
+	printf("score: %ld\n",re);
 }

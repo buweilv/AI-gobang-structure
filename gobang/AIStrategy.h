@@ -11,3 +11,4 @@
 void ringKingStrategy(int *, int *, int chess);
 void user1Strategy(int *, int *, int chess);
 void user2Strategy(int *, int *, int chess);
+long evaluate(int maximizingPlayer, int chess);

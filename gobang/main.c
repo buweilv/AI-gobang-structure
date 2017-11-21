@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "gobang.h"
 #include "test.h"
+#include "utils.h"
 
 int checkBoard[boardLen][boardLen];
 int status = CONTINUE;
@@ -8,8 +9,8 @@ int status = CONTINUE;
 
 int main()
 {
-	/*
 	initCheckBoard();
+	/*
 	while (status == CONTINUE) {
 		firstHand(); 
 		if (status == CONTINUE)
@@ -17,8 +18,6 @@ int main()
 	}
 	output(); 
 	*/
-	//outputTest();
-	//judgeTest();
-	battleModeTest();
+	testEvaluate();
     return 0;
 }
