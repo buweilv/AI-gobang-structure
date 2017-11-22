@@ -62,10 +62,10 @@ void reverseStatus(char *status)
 {
 	int i = 1;
 	while (status[i] != '\0') {
-		if (status[i] =='1')
-			status[i] = '2';
-		else if (status[i] == '2')
-			status[i] = '1';
+		if (status[i] == 1)
+			status[i] = 2;
+		if (status[i] == 2)
+			status[i] = 1;
 		i++;
 	}
 	status[i - 1] = '2';
@@ -131,7 +131,6 @@ long evaluate(int maximizingPlayer, int chess)
 				status[j + 1] = '1';
 			else
 				status[j + 1] = '2';
-             
 		}
 		status[j] = '2';
 		status[j + 1] = '\0';
@@ -181,8 +180,8 @@ long evaluate(int maximizingPlayer, int chess)
 			else
 				status[j + 1] = '2';
 		}
-		status[j + 1] = '2';
-		status[j + 2] = '\0';
+		status[j] = '2';
+		status[j + 1] = '\0';
 		for (j = 0; j < patternNum; j++) {
 			matchNum = countMatch(chessType[j], status);
 			result += matchNum * score[j];
