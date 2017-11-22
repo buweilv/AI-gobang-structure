@@ -266,6 +266,7 @@ long evaluate(int maximizingPlayer, int chess)
 			matchNum = countMatch(chessType[k], status);
 			result += matchNum * score[k];
 		}
+		reverseStatus(status);
 		for (k = 0; k < patternNum; k++) {
 			matchNum = countMatch(chessType[k], status);
 			result -= matchNum * score[k];
