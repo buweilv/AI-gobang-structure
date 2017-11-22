@@ -62,10 +62,10 @@ void reverseStatus(char *status)
 {
 	int i = 1;
 	while (status[i] != '\0') {
-		if (status[i] == 1)
-			status[i] = 2;
-		if (status[i] == 2)
-			status[i] = 1;
+		if (status[i] =='1')
+			status[i] = '2';
+		else if (status[i] == '2')
+			status[i] = '1';
 		i++;
 	}
 	status[i - 1] = '2';
@@ -127,10 +127,11 @@ long evaluate(int maximizingPlayer, int chess)
 		for (j = 0; j < boardLen; j++) {
 			if (checkBoard[i][j] == EMPTY)
 				status[j+1] = '0';
-			if (checkBoard[i][j] == chess)
+			else if (checkBoard[i][j] == chess)
 				status[j + 1] = '1';
 			else
 				status[j + 1] = '2';
+             
 		}
 		status[j] = '2';
 		status[j + 1] = '\0';
@@ -151,7 +152,7 @@ long evaluate(int maximizingPlayer, int chess)
 		for (i = 0; i < boardLen; i++) {
 			if (checkBoard[i][j] == EMPTY)
 				status[i + 1] = '0';
-			if (checkBoard[i][j] == chess)
+			else if (checkBoard[i][j] == chess)
 				status[i + 1] = '1';
 			else
 				status[i + 1] = '2';
@@ -175,13 +176,13 @@ long evaluate(int maximizingPlayer, int chess)
 		for (j = 0; j <= i; j++) {
 			if (checkBoard[i-j][j] == EMPTY)
 				status[j + 1] = '0';
-			if (checkBoard[i-j][j] == chess)
+			else if (checkBoard[i-j][j] == chess)
 				status[j + 1] = '1';
 			else
 				status[j + 1] = '2';
 		}
-		status[j] = '2';
-		status[j + 1] = '\0';
+		status[j + 1] = '2';
+		status[j + 2] = '\0';
 		for (j = 0; j < patternNum; j++) {
 			matchNum = countMatch(chessType[j], status);
 			result += matchNum * score[j];
@@ -199,7 +200,7 @@ long evaluate(int maximizingPlayer, int chess)
 		for (i = boardLen - 1; i >= j; i--) {
 			if (checkBoard[i][col] == EMPTY)
 				status[k] = '0';
-			if (checkBoard[i][col] == chess)
+			else if (checkBoard[i][col] == chess)
 				status[k] = '1';
 			else
 				status[k] = '2';
@@ -226,7 +227,7 @@ long evaluate(int maximizingPlayer, int chess)
 		for (i = boardLen - 1; i >= boardLen - j - 1; i--) {
 			if (checkBoard[i][col] == EMPTY)
 				status[k] = '0';
-			if (checkBoard[i][col] == chess)
+			else if (checkBoard[i][col] == chess)
 				status[k] = '1';
 			else
 				status[k] = '2';
@@ -252,7 +253,7 @@ long evaluate(int maximizingPlayer, int chess)
 		for (j = boardLen - 1; j >= boardLen - 1 - i; j--) {
 			if (checkBoard[row][j] == EMPTY)
 				status[k] = '0';
-			if (checkBoard[row][j] == chess)
+			else if (checkBoard[row][j] == chess)
 				status[k] = '1';
 			else
 				status[k] = '2';

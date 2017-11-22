@@ -4,6 +4,7 @@
 #include "utils.h"
 #include <stdio.h>
 
+static enum {MIN_PLAYER, MAX_PLAYER};
 /*
 * 测试将最终的棋盘输出到文件中的效果
 * 测试用例：
@@ -158,6 +159,7 @@ void matchTest()
 	printf("abcdsedad has %d aa\n", countMatch("aa", "abcdsedad"));
 	printf("aabbbbbbsss has %d aa\n", countMatch("aa", "aabbbbbbsss"));
 	printf("1111111 has %d 11\n", countMatch("11", "1111111"));
+	printf("2111112 has %d 11111\n", countMatch("11111", "2111112"));
 }
 
 void testEvaluate()
@@ -172,6 +174,6 @@ void testEvaluate()
 	secondHandTime = 150000;
 	judge(0, 4, WHITE, 20);
 	output();
-	long re = evaluate(1, WHITE);
+	long re = evaluate(MAX_PLAYER, WHITE);
 	printf("score: %ld\n",re);
 }
