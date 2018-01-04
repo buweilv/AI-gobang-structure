@@ -10,15 +10,15 @@ int status = CONTINUE;
 int main()
 {
 	initCheckBoard();
-	/*
+	
 	while (status == CONTINUE) {
 		firstHand(); 
 		if (status == CONTINUE)
 			secondHand(); 
 	}
 	output(); 
-	*/
+	
     //matchTest();
-	testEvaluate();
+	//testEvaluate();
     return 0;
 }

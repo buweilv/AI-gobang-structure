@@ -12,7 +12,7 @@ void user1Strategy(int *row, int *col, int chess)
 {
 	long alpha = LONG_MIN;
 	long beta = LONG_MAX;
-	alphaBeta(4, alpha, beta, MAX_PLAYER, chess, row, col);
+	alphaBeta(2, alpha, beta, MAX_PLAYER, chess, row, col);
 }
 
 void user2Strategy(int *row, int *col, int chess)
@@ -25,7 +25,7 @@ void ringKingStrategy(int *row, int *col, int chess)
 {
 	long alpha = LONG_MIN;
 	long beta = LONG_MAX;
-	alphaBeta(4, alpha, beta, MAX_PLAYER, chess, row, col);
+	alphaBeta(2, alpha, beta, MAX_PLAYER, chess, row, col);
 }
 
 /*
@@ -317,7 +317,7 @@ long alphaBeta(int depth, long alpha, long beta, int maximizingPlayer, int chess
 			for (j = 0; j < boardLen; j++) {
 				if (availablePosition[i][j] == AVAILABLE) {
 					checkBoard[i][j] = chess;
-					long re = alphaBeta(depth - 1, alpha, beta, MIN_PLAYER, reverseChess(chess), x, y);
+					long re = alphaBeta(depth - 1, alpha, beta, MAX_PLAYER, reverseChess(chess), x, y);
 					if (re < bestValue) {
 						bestValue = re;
 						*x = i;
