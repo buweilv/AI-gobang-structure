@@ -16,7 +16,7 @@ void initCheckBoard()
 
 void output()
 {
-	FILE *fp;
+	FILE *fp = NULL;
 	if (status == STRATEGY_ERROR)
 		fp = fopen(FILE_NAME, "a");
 	else
