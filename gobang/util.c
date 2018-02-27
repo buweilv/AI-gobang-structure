@@ -2,6 +2,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+#define up 'w'
+#define down 's'
+#define left 'a'
+#define right 'd'
+#define ok 'j'		//落子是j
+
 double diffFabs(double d1, double d2)
 {
 	double re = d1 - d2;
@@ -56,4 +63,44 @@ int countMatch(const char* pattern, const char* text)
 	}
 	free(next);
 	return matchCount;
+}
+
+void push(coordArray *s, coordinate c) {
+	if (s != NULL && s->top < MAX_SIZE - 1) {
+		s->arr[s->top+1] = c;
+		s->top++;
+	}
+}
+
+coordinate pop(coordArray *s) {
+	coordinate c = { 15, 15 }; //非法位置
+	if (s != NULL && s->top > -1) {
+		c = s->arr[s->top];
+		s->top--;
+	}
+	return c;
+}
+
+void unshift(coordArray *s, coordinate c) {
+	if (s != NULL && s->top > -1 && s->top < MAX_SIZE - 1) {
+		for (int i = s->top; i >= 0; i--)
+			s->arr[i + 1] = s->arr[i];
+		s->arr[0] = c;
+		s->top++;
+	}
+}
+
+coordArray * connect(coordArray *a, coordArray *b) {
+	if (a != NULL && b != NULL && a->top + b->top <= MAX_SIZE - 2) {
+		for (int i = 0; i <= b->top; i++) {
+			push(a, b->arr[i]);
+		}
+	}
+	return a;
+}
+
+void userInterface(int *row, int *col) 
+{
+//
+	
 }

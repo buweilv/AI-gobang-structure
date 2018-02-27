@@ -56,10 +56,10 @@ void output()
 	}
 	fprintf(fp, "¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T\n");
 	if (status == BLACK_WIN)
-		fprintf(fp, "Black Chess wins! Black took %lf secs to finish the game, White took %lf secs to finish the game\n", firstHandTime / CLOCKS_PER_SEC, secondHandTime / CLOCKS_PER_SEC);
+		fprintf(fp, "Black Chess wins!\n");
 	if (status == WHITE_WIN)
-		fprintf(fp, "White Chess wins! Black took %lf secs to finish the game, White took %lf secs to finish the game\n", firstHandTime / CLOCKS_PER_SEC, secondHandTime / CLOCKS_PER_SEC);
+		fprintf(fp, "White Chess wins!\n");
 	if (status == DRAW)
-		fprintf(fp, "Game to draw... Black took %lf secs, White took %lf secs\n", firstHandTime / CLOCKS_PER_SEC, secondHandTime / CLOCKS_PER_SEC);
+		fprintf(fp, "Game to draw...\n");
 	fclose(fp);
 }

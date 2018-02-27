@@ -4,7 +4,7 @@
 #include "utils.h"
 #include <stdio.h>
 
-static enum {MIN_PLAYER, MAX_PLAYER};
+//static enum {MIN_PLAYER, MAX_PLAYER};
 /*
 * 测试将最终的棋盘输出到文件中的效果
 * 测试用例：
@@ -72,6 +72,7 @@ void judgeTest()
 	*/
 	// 正斜-win
 	
+	/*
 	initCheckBoard();
 	checkBoard[0][0] = BLACK; checkBoard[0][1] = BLACK;
 	checkBoard[1][0] = BLACK; checkBoard[1][2] = BLACK; checkBoard[2][1] = BLACK;
@@ -81,7 +82,7 @@ void judgeTest()
 	secondHandTime = 150000;
 	judge(0, 4, WHITE, 20);
 	output();
-	
+	*/
 	// 平局-误差在阈值时间内部
 	/*
 	// 偶数行的形式
@@ -162,6 +163,7 @@ void matchTest()
 	printf("2111112 has %d 11111\n", countMatch("11111", "2111112"));
 }
 
+/*
 void testEvaluate()
 {
 	int i;
@@ -172,8 +174,9 @@ void testEvaluate()
 		checkBoard[4 - i][i] = WHITE;
 	firstHandTime = 20000;
 	secondHandTime = 150000;
-	judge(0, 4, WHITE, 20);
+	judge(0, 4, WHITE);
 	output();
-	long re = evaluate(MAX_PLAYER, WHITE);
+	long re = evaluate(AI);
 	printf("score: %ld\n",re);
 }
+*/

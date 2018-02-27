@@ -11,20 +11,23 @@
 
 // 默认情况下是挑战擂主模式，默认的先手是擂主策略，后手策略是user1Strategy
 #if (!defined(TWOUSERS) && !defined(FIRST))
-void(*firstHandStrategy)(int*, int*, int) = ringKingStrategy;
-void(*secondHandStrategy)(int*, int*, int) = user1Strategy;
+int first = AI;
+void(*firstHandStrategy)(int*, int*) = ringKingStrategy;
+void(*secondHandStrategy)(int*, int*) = user1Strategy;
 #endif
 #ifdef TWOUSERS // 双人对战时，user1Strategy是先手策略，user2Strategy是后手策略
-void(*firstHandStrategy)(int*, int*, int) = user1Strategy;
-void(*secondHandStrategy)(int*, int*, int) = user2Strategy;
+int first = USER1;
+void(*firstHandStrategy)(int*, int*) = user1Strategy;
+void(*secondHandStrategy)(int*, int*) = user2Strategy;
 #endif // TWOUSERS
 #ifdef FIRST // 挑战擂主模式时，如果编译设置了FIRST宏，表示用户提交的策略是先手策略
-void(*firstHandStrategy)(int*, int*, int) = user1Strategy;
-void(*secondHandStrategy)(int*, int*, int) = ringKingStrategy;
+int first = USER1;
+void(*firstHandStrategy)(int*, int*) = user1Strategy;
+void(*secondHandStrategy)(int*, int*) = ringKingStrategy;
 #endif // FIRST
 
 // 平局的情况下，允许两个棋手下棋总时间相差的阈值，此处暂且以秒来作为计时单位
-double totalTimeThreshold = 10; 
+double timeThreshold = 0; 
 // 先手、后手下棋的总时间
 double firstHandTime = 0;
 double secondHandTime = 0;
@@ -168,7 +171,8 @@ end_judge:
 
 // 裁判先判断落子是否正确；再判断局势
 // 注意，此处的精度太小的话很有可能溢出
-void judge(int row, int col, int side, double time)
+/*
+void judge(int row, int col, int side)
 {
 	// 判断落子是否正确
 	if (checkBoard[row][col] != EMPTY || row >= boardLen || col >= boardLen) {
@@ -181,43 +185,57 @@ void judge(int row, int col, int side, double time)
 		fprintf(fp, "══════════════════════════\n");
 		fclose(fp);
 	} // 判断当前局势
-	else
-	{
+	else {
 		checkBoard[row][col] = side; //裁判判定落子无误之后，准许落子
-		if (side == BLACK)
-			firstHandTime += time;
-		else
-			secondHandTime += time;
-		// 判断当前的局势
 		status = getBoardStatus();
-		// 如果是平局，还需要关注双方的时间之差是否在阈值范围内
-		if (status == DRAW) {
-			if (diffFabs(firstHandTime / CLOCKS_PER_SEC, secondHandTime / CLOCKS_PER_SEC) > totalTimeThreshold) {
-				if (firstHandTime > secondHandTime)
-					status = WHITE_WIN;
-				else
-					status = BLACK_WIN;
-			}
-		}
 	}
 }
+*/
 
+// 判断当前的落子位置是否有效
+int isValid(int row, int col, int side)
+{
+	if (checkBoard[row][col] != EMPTY || row >= boardLen || col >= boardLen) {
+		status = STRATEGY_ERROR;
+		// 日志记录当前落子无效的实际情况
+		FILE *fp = fopen(FILE_NAME, "w");
+		if (side == BLACK)
+			fprintf(fp, "Black chess strategy Error, try to put chess on a invalid place(%d, %d)\n", row, col);
+		else
+			fprintf(fp, "White chess strategy Error, try to put chess on a invalid place(%d, %d)\n", row, col);
+		fprintf(fp, "══════════════════════════\n");
+		fclose(fp);
+		return 0;
+	}
+	return 1;
+}
 
-void play(void (*strategy)(int*, int*, int), int side)
+void play(void (*strategy)(int*, int*), int side)
 {
 	// 落子的坐标
 	int row, col;
 	// 策略 -> 返回落子的位置
 	clock_t start, end;
 	start = clock();
-	strategy(&row, &col, side);
+	strategy(&row, &col);
 	end = clock();
 	double time = (double)(end - start); //经测试，Ubuntu16.04上显示精度为微秒级别
-	if (side == BLACK)
-		printf("BLACK chess on (%d,%d), took %ld micro secs\n", row, col, time);
-	if (side == WHITE)
-		printf("WHITE chess on (%d,%d), took %ld micro secs\n", row, col, time);
-	judge(row, col, side, time);
+	if (timeThreshold != 0 && time / CLOCKS_PER_SEC > timeThreshold) { //当timeThreshold为0的时候，判断胜负依据时间的功能关闭
+		if (side == BLACK)
+			status = WHITE_WIN;
+		else
+			status = BLACK_WIN;
+	}
+	else { // 在timeThreshold范围内 or 没有超时
+		if (isValid(row, col, side)) {
+			put(row, col, side);
+			if (side == BLACK)
+				printf("BLACK chess on (%d,%d), took %lf micro secs\n", row, col, time);
+			if (side == WHITE)
+				printf("WHITE chess on (%d,%d), took %lf micro secs\n", row, col, time);
+			status = getBoardStatus();
+		}
+	}
 }
 
 void firstHand()

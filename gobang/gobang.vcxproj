@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClCompile Include="AIStrategy.c" />
     <ClCompile Include="checkboard.c" />
+    <ClCompile Include="evaluate_point.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="test.c" />
