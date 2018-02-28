@@ -40,26 +40,19 @@ void user1Strategy(int *row, int *col)
 	if (count == 0) { //是否是第一步棋
 		if (first == USER1) { // 如果是先手
 			*row = 7; *col = 7;
-			//checkBoard[7][7] = side;
 			initScore();
 		}
 		else { //后手
 			if (checkBoard[7][7] == EMPTY) {
 				*row = 7; *col = 7;
-				//checkBoard[7][7] = side;
 			}
 			else if (checkBoard[7][8] == EMPTY) {
 				*row = 7; *col = 8;
-				//checkBoard[7][8] = side;
 			}
 		}
 	}
 	else {
 		negaMax(2, alpha, beta, USER1, row, col);
-		//if (isValid(*row, *col, side)) {
-		//	checkBoard[*row][*col] = side; // 落子位置有效，则下棋
-		//	updateScore(*row, *col, &ps);
-		//}
 	}
 	count++;
 }
