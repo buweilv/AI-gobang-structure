@@ -73,25 +73,18 @@ void ringKingStrategy(int *row, int *col)
 	if (count == 0) { //是否是第一步棋
 		if (first == AI) { // 如果是先手
 			*row = 7; *col = 7;
-			//checkBoard[7][7] = side;
 			initScore();
 		}
 		else { //后手
 			if (checkBoard[7][7] == EMPTY) {
 				*row = 7; *col = 7;
-				//checkBoard[7][7] = side;
 			}
 			else if (checkBoard[7][8] == EMPTY) {
 				*row = 7; *col = 8;
-			//	checkBoard[7][8] = side;
 			}
 		}
 	} else {
 			negaMax(6, alpha, beta, AI, row, col);
-			//if (isValid(*row, *col, side)) {
-				//checkBoard[*row][*col] = side; // 落子位置有效，则下棋
-				//updateScore(*row, *col, &ps);
-			//}
 		}
 	count++;
 }
