@@ -22,4 +22,3 @@ void push(coordArray *s, coordinate c);
 coordinate pop(coordArray *s);
 void unshift(coordArray *s, coordinate c);
 coordArray * connect(coordArray *a, coordArray *b);
-void userInterface(int *row, int *col); //用户手动下棋

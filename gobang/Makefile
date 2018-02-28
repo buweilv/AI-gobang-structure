@@ -1,7 +1,7 @@
 OBJS = main.o AIStrategy.o checkboard.o player.o  util.o evaluate_point.o
 gobang : $(OBJS)
 	cc -o gobang $(OBJS)
-main.o : gobang.h test.h utils.h
+main.o : gobang.h  utils.h
 	cc -g3 -c main.c
 AIStrategy.o : AIStrategy.h gobang.h utils.h
 	cc -g3 -c AIStrategy.c

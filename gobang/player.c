@@ -169,28 +169,6 @@ end_judge:
 	return CONTINUE;
 }
 
-// 裁判先判断落子是否正确；再判断局势
-// 注意，此处的精度太小的话很有可能溢出
-/*
-void judge(int row, int col, int side)
-{
-	// 判断落子是否正确
-	if (checkBoard[row][col] != EMPTY || row >= boardLen || col >= boardLen) {
-		status = STRATEGY_ERROR;
-		FILE *fp = fopen(FILE_NAME, "w");
-		if (side == BLACK)
-			fprintf(fp, "Black chess strategy Error, try to put chess on a invalid place(%d, %d)\n", row, col);
-		else
-			fprintf(fp, "White chess strategy Error, try to put chess on a invalid place(%d, %d)\n", row, col);
-		fprintf(fp, "══════════════════════════\n");
-		fclose(fp);
-	} // 判断当前局势
-	else {
-		checkBoard[row][col] = side; //裁判判定落子无误之后，准许落子
-		status = getBoardStatus();
-	}
-}
-*/
 
 // 判断当前的落子位置是否有效
 int isValid(int row, int col, int side)

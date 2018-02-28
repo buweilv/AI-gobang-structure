@@ -99,8 +99,3 @@ coordArray * connect(coordArray *a, coordArray *b) {
 	return a;
 }
 
-void userInterface(int *row, int *col) 
-{
-//
-	
-}

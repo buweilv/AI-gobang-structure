@@ -12,13 +12,6 @@
 #include "utils.h"
 #include "gobang.h"
 
-/*
-typedef struct {
-	long comScore[boardLen][boardLen]; //棋盘每个位置如果落com棋子的得分
-	long humScore[boardLen][boardLen]; //棋盘每个位置如果落对手棋子的得分
-}positionScore;
-*/
-
 
 void ringKingStrategy(int *, int *);
 void user1Strategy(int *, int *);
