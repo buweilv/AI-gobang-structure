@@ -28,9 +28,6 @@ void(*secondHandStrategy)(int*, int*) = ringKingStrategy;
 
 // 平局的情况下，允许两个棋手下棋总时间相差的阈值，此处暂且以秒来作为计时单位
 double timeThreshold = 0; 
-// 先手、后手下棋的总时间
-double firstHandTime = 0;
-double secondHandTime = 0;
 
 
 int getBoardStatus()

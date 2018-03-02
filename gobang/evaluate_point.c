@@ -476,17 +476,6 @@ void initScore()
 			humScore[i][j] = 0;
 		}
 	}
-	/*
-	for (int i = 0; i < boardLen; i++) {
-		for (int j = 0; j < boardLen; j++) {
-			if (checkBoard[i][j] == EMPTY) {
-				if (hasNeighbor(i, j, 2, 2)) {
-					update(i, j, ps);
-				}
-			}
-		}
-	}
-	*/
 }
 
 //更新一个点附近的分数

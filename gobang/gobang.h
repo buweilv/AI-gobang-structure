@@ -18,8 +18,6 @@ enum { EMPTY, BLACK, WHITE }; // 注意BLACK与BLACK_WIN WHITE与WHITE_WIN是对位的
 enum { AI, USER1 }; //在和本机AI对垒的情况下，区分本机AI和对手
 // 平局的情况下，允许两个棋手下棋总时间相差的阈值，此处暂且以秒来作为计时单位
 extern double timeThreshold;
-extern double firstHandTime;
-extern double secondHandTime;
 extern long comScore[boardLen][boardLen]; //棋盘每个位置如果落com棋子的得分
 extern long humScore[boardLen][boardLen]; //棋盘每个位置如果落对手棋子的得分
 
